@@ -58,7 +58,7 @@ from scipy import stats
 # Set professional styling
 sns.set_style("whitegrid")
 sns.set_palette("husl")
-plt.rcParams['figure.figsize'] = (12, 6)
+plt.rcParams['figure.figsize'] = (8, 6)
 plt.rcParams['font.size'] = 11
 plt.rcParams['axes.labelsize'] = 12
 plt.rcParams['axes.titlesize'] = 14
@@ -130,8 +130,6 @@ for shop in sorted(carsDF['shopID'].unique()):
 
 ax1.set_xlabel('Shop ID', fontweight='bold')
 ax1.set_ylabel('Cars Fixed per Day', fontweight='bold')
-ax1.set_title('All 250 Days: Productivity by Shop and Boss Presence', 
-              fontsize=14, fontweight='bold', pad=15)
 ax1.set_xticks([1, 2, 3, 4, 5])
 ax1.set_xticklabels(['Shop 1', 'Shop 2', 'Shop 3', 'Shop 4', 'Shop 5'])
 ax1.grid(True, alpha=0.3, linestyle='--')
@@ -163,8 +161,6 @@ for patch, color in zip(bp['boxes'], colors_list):
 
 ax2.set_xlabel('Shop ID', fontweight='bold')
 ax2.set_ylabel('Cars Fixed per Day', fontweight='bold')
-ax2.set_title('Productivity Distribution: Boss Present vs Absent', 
-              fontsize=14, fontweight='bold', pad=15)
 ax2.set_xticks([1, 2, 3, 4, 5])
 ax2.set_xticklabels(['Shop 1', 'Shop 2', 'Shop 3', 'Shop 4', 'Shop 5'])
 ax2.grid(True, alpha=0.3, linestyle='--', axis='y')
@@ -221,7 +217,7 @@ for bars in [bars1, bars2]:
 ax.set_xlabel('Shop ID', fontweight='bold', fontsize=12)
 ax.set_ylabel('Average Cars Fixed per Day', fontweight='bold', fontsize=12)
 ax.set_title("Boss Presence Impact: Which Shops Benefit Most?", 
-             fontsize=14, fontweight='bold', pad=15)
+             fontsize=10, fontweight='bold', pad=15)
 ax.set_xticks(x)
 ax.set_xticklabels(['Shop 1', 'Shop 2', 'Shop 3', 'Shop 4', 'Shop 5'])
 ax.legend(loc='upper left', frameon=True, fancybox=True, shadow=True, fontsize=11)
@@ -241,7 +237,7 @@ plt.show()
 #| fig-width: 10
 #| fig-height: 6
 
-fig, ax = plt.subplots(figsize=(10, 6))
+fig, ax = plt.subplots(figsize=(8, 6))
 
 # Calculate the difference
 diff_data = []
@@ -271,7 +267,7 @@ ax.set_xlabel('Shop ID', fontweight='bold', fontsize=12)
 ax.set_ylabel('Difference in Average Cars Fixed\n(Boss Present - Boss Absent)', 
               fontweight='bold', fontsize=12)
 ax.set_title("Which Shops Benefit Most from Patrick's Presence?", 
-             fontsize=14, fontweight='bold', pad=15)
+             fontsize=10, fontweight='bold', pad=15)
 ax.set_xticks(range(1, 6))
 ax.set_xticklabels(['Shop 1', 'Shop 2', 'Shop 3', 'Shop 4', 'Shop 5'])
 ax.grid(True, alpha=0.3, linestyle='--', axis='y')
@@ -421,7 +417,7 @@ improvement = recommended_total - current_total
 improvement_pct = (improvement / current_total) * 100
 
 # Create visualization
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 6))
 
 # Left: Annual revenue by shop
 shops = ['Shop 1', 'Shop 2', 'Shop 3', 'Shop 4', 'Shop 5']
@@ -435,8 +431,8 @@ bars2 = ax1.bar(x + width/2, [i/1000 for i in recommended_impact], width,
 
 ax1.set_xlabel('Shop', fontweight='bold', fontsize=12)
 ax1.set_ylabel('Annual Revenue (Thousands $)', fontweight='bold', fontsize=12)
-ax1.set_title('Annual Revenue: Current vs Recommended Schedule', 
-              fontsize=14, fontweight='bold', pad=15)
+ax1.set_title('Annual Revenue: Current vs Recommended', 
+              fontsize=10, fontweight='bold', pad=15)
 ax1.set_xticks(x)
 ax1.set_xticklabels(shops)
 ax1.legend(loc='upper left', frameon=True, fancybox=True, shadow=True)
@@ -448,7 +444,7 @@ for bars in [bars1, bars2]:
         height = bar.get_height()
         ax1.text(bar.get_x() + bar.get_width()/2., height,
                 f'${height:.0f}K',
-                ha='center', va='bottom', fontweight='bold', fontsize=9)
+                ha='center', va='bottom', fontweight='bold', fontsize=8)
 
 # Right: Total impact comparison
 categories = ['Current\nSchedule', 'Recommended\nSchedule', 'Additional\nRevenue']
@@ -462,11 +458,11 @@ for bar, val in zip(bars, values):
     height = bar.get_height()
     ax2.text(bar.get_x() + bar.get_width()/2., height,
             f'${val:.0f}K',
-            ha='center', va='bottom', fontweight='bold', fontsize=11)
+            ha='center', va='bottom', fontweight='bold', fontsize=8)
 
 ax2.set_ylabel('Annual Revenue (Thousands $)', fontweight='bold', fontsize=12)
 ax2.set_title(f'Total Impact: +${improvement:,.0f} per Year\n({improvement_pct:.1f}% Increase)', 
-              fontsize=14, fontweight='bold', pad=15)
+              fontsize=10, fontweight='bold', pad=15)
 ax2.grid(True, alpha=0.3, linestyle='--', axis='y')
 
 plt.tight_layout()
@@ -569,7 +565,7 @@ for scenario_name, schedule in scenarios.items():
 scenario_df = pd.DataFrame(scenario_results)
 
 # Create visualization
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 6))
 
 # Left: Total cars fixed
 scenario_names = scenario_df['Scenario'].values
@@ -583,11 +579,11 @@ for bar, val in zip(bars1, total_cars):
     width = bar.get_width()
     ax1.text(width, bar.get_y() + bar.get_height()/2.,
             f'{int(val):,} cars',
-            ha='left', va='center', fontweight='bold', fontsize=10)
+            ha='left', va='center', fontweight='bold', fontsize=8)
 
-ax1.set_xlabel('Total Cars Fixed per Year', fontweight='bold', fontsize=12)
+ax1.set_xlabel('Total Cars Fixed per Year', fontweight='bold', fontsize=10)
 ax1.set_title('Projected Annual Productivity by Scenario', 
-              fontsize=14, fontweight='bold', pad=15)
+              fontsize=10, fontweight='bold', pad=10)
 ax1.grid(True, alpha=0.3, linestyle='--', axis='x')
 
 # Right: Revenue comparison
@@ -602,9 +598,9 @@ for bar, val in zip(bars2, revenue):
             f'${val/1000:.0f}K',
             ha='left', va='center', fontweight='bold', fontsize=10)
 
-ax2.set_xlabel('Annual Revenue (Thousands $)', fontweight='bold', fontsize=12)
+ax2.set_xlabel('Annual Revenue (Thousands $)', fontweight='bold', fontsize=10)
 ax2.set_title('Projected Annual Revenue by Scenario', 
-              fontsize=14, fontweight='bold', pad=15)
+              fontsize=10, fontweight='bold', pad=10)
 ax2.grid(True, alpha=0.3, linestyle='--', axis='x')
 
 plt.tight_layout()
